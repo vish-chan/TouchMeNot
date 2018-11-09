@@ -83,7 +83,6 @@ public class ExtraInfoFragment extends Fragment {
             public void onGlobalLayout() {
                 mWidth = getView().getWidth();
                 mHeight = getView().getHeight();
-                hLogWrapper.write('V', TAG, "ExtraInfo fragment created with dim. (w x h): "+mWidth+":"+mHeight);
             }
         });
     }

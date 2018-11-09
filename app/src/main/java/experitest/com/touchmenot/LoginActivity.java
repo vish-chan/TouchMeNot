@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = mUsername.getText().toString();
                 String re_username = mReUsername.getText().toString();
-                if (username != null && username.length() != 0 && username.equals(re_username)) {
+                if (username.length() != 0 && username.equals(re_username)) {
                     hLogWrapper.write('V', TAG, "Successful login for username: " + username);
                     Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
                     Bundle bundle = new Bundle();

@@ -11,26 +11,26 @@ import java.util.List;
 import java.util.Random;
 
 public class DotSprite {
-    final String TAG = "DOTSPRITE";
-    final String REMAININGTEXT = "Remaining time: ";
-    final Double mResFactor = 0.05;
-    final long MAXTIME = 3*(long)Math.pow(10.0, 9.0);
-    final int TEXTPADDING = 15;
-    GameView mGameView;
-    Integer mX, mY;
-    long mStartTime;
-    long mTotalTime ;
-    long mRemainingTime;
-    List<Pair<Integer, Integer>> mMovesList;
-    Integer SCREEN_START_X, SCREEN_START_Y, SCREEN_END_X, SCREEN_END_Y;
-    Bitmap mBitmap;
-    Rect mBoundingRect;
-    int mWidth;
-    int mHeight;
-    final float mScalingFactor = 0.1f;
-    int mTopPadding;
-    final float mTextSize = 40f;
-    Paint mPaint;
+    private final String TAG = "DOTSPRITE";
+    private final String REMAININGTEXT = "Remaining time: ";
+    private final Double mResFactor = 0.05;
+    private final long MAXTIME = 3*(long)Math.pow(10.0, 9.0);
+    private final int TEXTPADDING = 15;
+    private GameView mGameView;
+    private Integer mX, mY;
+    private long mStartTime;
+    private long mTotalTime ;
+    private long mRemainingTime;
+    private List<Pair<Integer, Integer>> mMovesList;
+    private Integer SCREEN_START_X, SCREEN_START_Y, SCREEN_END_X, SCREEN_END_Y;
+    private Bitmap mBitmap;
+    private Rect mBoundingRect;
+    private int mWidth;
+    private int mHeight;
+    private final float mScalingFactor = 0.1f;
+    private int mTopPadding;
+    private final float mTextSize = 40f;
+    private Paint mPaint;
 
     public DotSprite(GameView theGameView, Bitmap theBitmap) {
         this.mGameView = theGameView;
@@ -49,7 +49,7 @@ public class DotSprite {
         mTopPadding = textBounds.height()+TEXTPADDING;
     }
 
-    public void init() {
+    protected void init() {
         Random rand = new Random();
         mX = SCREEN_START_X + rand.nextInt(SCREEN_END_X+1);
         mY = SCREEN_START_Y + rand.nextInt(SCREEN_END_Y+1);
@@ -60,7 +60,7 @@ public class DotSprite {
         mMovesList.add(new Pair<>(mX, mY));
     }
 
-    public void resetDot() {
+    protected void resetDot() {
         Random rand = new Random();
         mX = SCREEN_START_X + rand.nextInt(SCREEN_END_X+1);
         mY = SCREEN_START_Y + rand.nextInt(SCREEN_END_Y+1);
@@ -73,7 +73,7 @@ public class DotSprite {
         mMovesList.add(new Pair<>(mX, mY));
     }
 
-    public void update() {
+    protected void update() {
         long elapsedTime = System.nanoTime() - mStartTime;
         mRemainingTime = (mTotalTime-elapsedTime)>0?(mTotalTime-elapsedTime):0;
         if(mRemainingTime==0) {
@@ -82,7 +82,7 @@ public class DotSprite {
         }
     }
 
-    public void draw(Canvas canvas) {
+    protected void draw(Canvas canvas) {
         Paint p = new Paint();
         p.setTextSize(50f);
         p.setAntiAlias(true);
@@ -94,18 +94,18 @@ public class DotSprite {
         canvas.drawBitmap(mBitmap, mX, mY, mPaint );
     }
 
-    public void setScreenXY(Integer sx, Integer sy, Integer ex, Integer ey) {
+    protected void setScreenXY(Integer sx, Integer sy, Integer ex, Integer ey) {
         SCREEN_START_X = sx;
         SCREEN_START_Y = sy+mTopPadding;
         SCREEN_END_X = ex-mWidth;
-        SCREEN_END_Y = ey-mHeight;
+        SCREEN_END_Y = ey-mHeight-mTopPadding;
     }
 
-    public Rect getBoundingRect() {
+    protected Rect getBoundingRect() {
         return mBoundingRect;
     }
 
-    public List<Pair<Integer, Integer>> getmMovesList() {
+    protected List<Pair<Integer, Integer>> getMovesList() {
         return mMovesList;
     }
 }

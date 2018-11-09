@@ -34,13 +34,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     public GameView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
-        // TODO Auto-generated constructor stub
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-        // TODO Auto-generated constructor stub
     }
 
     public void setParent(GameActivity theParent) {
@@ -125,10 +123,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         mGameThread.setRunning(false);
         Bundle b = new  Bundle();
         b.putInt(theEndString, mScore);
-        List<Pair<Integer, Integer>> movesList = mDot.getmMovesList();
+        List<Pair<Integer, Integer>> movesList = mDot.getMovesList();
         StringBuilder movesListSb = new StringBuilder();
         for(int i=0;i<movesList.size();i++) {
-            movesListSb.append("("+movesList.get(i).first+","+movesList.get(i).second+")");
+            movesListSb.append("(").append(movesList.get(i).first).append(",").append(movesList.get(i).second).append(")");
             movesListSb.append(" , ");
         }
         b.putString("MOVES", movesListSb.toString());
