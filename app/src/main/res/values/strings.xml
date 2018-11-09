@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">TouchMeNot</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="gps">GPS Coordinates (lat/lon): </string>
+    <string name="wifi">Wifi: </string>
+    <string name="usdtoshekel">USD to Shekel: </string>
+    <string name="time">Time: </string>
+    <string name="loginbtn">Login</string>
+    <string name="username">Username</string>
+    <string name="reusername">Re-enter Username</string>
+    <string name="game">Play Game</string>
+    <string name="records">Records</string>
+    <string name="logs">Logs</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
