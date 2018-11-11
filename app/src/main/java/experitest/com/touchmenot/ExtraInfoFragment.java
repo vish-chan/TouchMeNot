@@ -18,8 +18,6 @@ public class ExtraInfoFragment extends Fragment {
     final String TAG = "EXTRAINFO<TouchMeNot>";
     TextView mGPSTextView;
     TextView mWifiTextView;
-    TextView mUSDtoShekel;
-    TextView mTimeTextView;
     hGPSManager mGPSManager;
     hWifiManager mWifiManager;
     int mWidth, mHeight;

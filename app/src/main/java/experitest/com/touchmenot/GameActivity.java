@@ -165,11 +165,16 @@ public class GameActivity extends FragmentActivity {
         AlertDialog dialog = new AlertDialog.Builder(GameActivity.this)
                 .setTitle(theTitle)
                 .setMessage("Your Score is " + theScore)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) { finish();
                             }
                         })
+                .setNeutralButton("RePlay",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) { finish(); startActivity(getIntent());
+                    }
+                })
                 .show();
         dialog.setCanceledOnTouchOutside(false);
     }

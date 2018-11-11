@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class DotSprite {
+public class DotSprite  {
+    private static DotSprite mInstance = null;
     private final String TAG = "DOTSPRITE";
     private final String REMAININGTEXT = "Remaining time: ";
     private final Double mResFactor = 0.05;
@@ -33,6 +34,7 @@ public class DotSprite {
     private Paint mPaint;
 
     public DotSprite(GameView theGameView, Bitmap theBitmap) {
+        mInstance = this;
         this.mGameView = theGameView;
         this.mBitmap = Bitmap.createScaledBitmap(theBitmap, (int)(theBitmap.getWidth()*mScalingFactor), (int)(theBitmap.getHeight()*mScalingFactor), true);
         this.mStartTime = System.nanoTime();
@@ -84,7 +86,7 @@ public class DotSprite {
 
     protected void draw(Canvas canvas) {
         Paint p = new Paint();
-        p.setTextSize(50f);
+        p.setTextSize(mTextSize);
         p.setAntiAlias(true);
         Rect textBounds = new Rect();
         String text = "Remaining time:"+Math.round(mRemainingTime/1000000);
@@ -107,5 +109,9 @@ public class DotSprite {
 
     protected List<Pair<Integer, Integer>> getMovesList() {
         return mMovesList;
+    }
+
+    protected static DotSprite getCurrentInstance() {
+        return mInstance;
     }
 }
