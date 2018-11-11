@@ -67,9 +67,7 @@ public class ExtraInfoFragment extends Fragment {
                 } else {
                     this.setGPSTextView("No GPS permissions");
                 }
-                return;
             }
-
         }
     }
 

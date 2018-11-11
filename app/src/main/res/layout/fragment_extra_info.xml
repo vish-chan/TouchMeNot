@@ -24,23 +24,5 @@
         android:layout_margin="1dp"
         android:textColor="@color/colorWhite"
         android:text="@string/wifi" />
-    <TextView
-        android:id="@+id/usdtoshekel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/wifi"
-        android:layout_alignParentStart="true"
-        android:layout_margin="1dp"
-        android:textColor="@color/colorWhite"
-        android:text="@string/usdtoshekel" />
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/usdtoshekel"
-        android:layout_alignParentStart="true"
-        android:layout_margin="1dp"
-        android:textColor="@color/colorWhite"
-        android:text="@string/time" />
 
 </RelativeLayout>
