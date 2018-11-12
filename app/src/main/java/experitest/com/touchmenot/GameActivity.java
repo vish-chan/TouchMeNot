@@ -46,9 +46,14 @@ public class GameActivity extends FragmentActivity {
         };
     }
 
-    public int getFragmentHeight() {
+    public int getFragmentHeight1() {
         ExtraInfoFragment extrainfo = (ExtraInfoFragment) getSupportFragmentManager().findFragmentById(R.id.extrainfogame);
         return extrainfo.getView().getHeight();
+    }
+
+    public int getFragmentHeight2() {
+        WebViewCustomFragment webview = (WebViewCustomFragment) getSupportFragmentManager().findFragmentById(R.id.webitemsgame);
+        return webview.getView().getHeight();
     }
 
     public void performFinalTasks(String theTitle, final int theScore, final String theMoveItem) {

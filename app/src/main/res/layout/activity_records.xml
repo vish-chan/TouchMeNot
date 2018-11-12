@@ -11,14 +11,22 @@
         android:name="experitest.com.touchmenot.RecordsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="110dp"
         android:layout_alignParentTop="true"/>
+
+    <fragment
+        android:id="@+id/webitemsrecords"
+        android:name="experitest.com.touchmenot.WebViewCustomFragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"/>
 
     <fragment
         android:id="@+id/extrainforecords"
         android:name="experitest.com.touchmenot.ExtraInfoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_above="@id/webitemsrecords"
+        android:layout_alignEnd="@id/webitemsrecords"/>
 
 </RelativeLayout>

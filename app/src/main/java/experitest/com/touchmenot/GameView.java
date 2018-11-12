@@ -19,7 +19,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     final String TAG = "GAMEVIEW<TouchMeNot>";
     GameActivity mParent;
-    int mHeightPadding = 0;
+    int mHeightPadding1 = 0, mHeightPadding2 = 0;
     Rect mActualScreenRect;
     int mPadding = 0;
     private GameThread mGameThread;
@@ -54,10 +54,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         hLogWrapper.write('V', TAG, "Surface view created with "+getWidth()+"x"+getHeight()+" dimension.");
-        while((mHeightPadding = mParent.getFragmentHeight())<=0);
-        mActualScreenRect = new Rect(this.getLeft()+mPadding, this.getTop()+mPadding, this.getRight()-mPadding, this.getBottom() - mHeightPadding);
+        while((mHeightPadding1 = mParent.getFragmentHeight1())<=0);
+        while((mHeightPadding2 = mParent.getFragmentHeight2())<=0);
+        mHeightPadding1+=mHeightPadding2;
+        mActualScreenRect = new Rect(this.getLeft()+mPadding, this.getTop()+mPadding, this.getRight()-mPadding, this.getBottom() - mHeightPadding1);
         mDot = new DotSprite(this, BitmapFactory.decodeResource(getResources(), R.drawable.dot));
-        mDot.setScreenXY(this.getLeft()+mPadding, this.getTop()+mPadding, this.getRight()-mPadding, this.getBottom() - mHeightPadding);
+        mDot.setScreenXY(this.getLeft()+mPadding, this.getTop()+mPadding, this.getRight()-mPadding, this.getBottom() - mHeightPadding1);
         mDot.init();
         mGameThread.setRunning(true);
         mGameThread.start();

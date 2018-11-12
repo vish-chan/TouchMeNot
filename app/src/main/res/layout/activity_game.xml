@@ -12,14 +12,25 @@
         android:layout_height="match_parent" />
 
     <fragment
+        android:id="@+id/webitemsgame"
+        android:name="experitest.com.touchmenot.WebViewCustomFragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout="@layout/fragment_web_view_custom" />
+
+    <fragment
         android:id="@+id/extrainfogame"
         android:name="experitest.com.touchmenot.ExtraInfoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/webitemsgame"
+        app:layout_constraintBottom_toTopOf="@id/webitemsgame"
         tools:layout="@layout/fragment_extra_info" />
 
 </android.support.constraint.ConstraintLayout>
