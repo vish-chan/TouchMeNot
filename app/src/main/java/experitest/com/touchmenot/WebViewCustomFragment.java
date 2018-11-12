@@ -10,12 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import java.lang.ref.WeakReference;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class WebViewCustomFragment extends Fragment {
 
+    final String TAG = "WEBVIEW<TouchMeNo>";
+    final long RELOADINTERVAL = 10000;
+    Handler mHandler;
 
     public WebViewCustomFragment() {
         // Required empty public constructor
@@ -30,15 +35,28 @@ public class WebViewCustomFragment extends Fragment {
         if(webview!=null) {
             webview.loadUrl("http://172.16.16.123:8080");
         }
-        Handler handler = new Handler() {
+
+
+        mHandler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
-                webview.reload();
-                this.sendEmptyMessageDelayed(0, 1000);
+                hLogWrapper.write('D', TAG, "handleMessage called for "+ getActivity().getLocalClassName());
+                if(webview!=null)
+                    webview.reload();
+                this.sendEmptyMessageDelayed(0, RELOADINTERVAL);
             }
         };
-        handler.sendEmptyMessageDelayed(0, 1000);
+        mHandler.sendEmptyMessageDelayed(0, RELOADINTERVAL );
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        if(mHandler!=null) {
+            mHandler.removeCallbacksAndMessages(null);
+            hLogWrapper.write('D', TAG, "Callbacks removed for"+ getActivity().getLocalClassName());
+        }
+        super.onDestroyView();
     }
 }
