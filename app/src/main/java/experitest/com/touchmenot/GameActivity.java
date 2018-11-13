@@ -19,6 +19,7 @@ import java.util.List;
 
 public class GameActivity extends FragmentActivity {
     final private String TAG = "GAMEACTIVITY<TouchMeNot>";
+    final static private Object LOCK = new Object();
     Handler mHandler;
 
     @Override
@@ -48,12 +49,16 @@ public class GameActivity extends FragmentActivity {
 
     public int getFragmentHeight1() {
         ExtraInfoFragment extrainfo = (ExtraInfoFragment) getSupportFragmentManager().findFragmentById(R.id.extrainfogame);
-        return extrainfo.getView().getHeight();
+        if(extrainfo!=null && extrainfo.getView()!=null)
+            return extrainfo.getView().getHeight();
+        return 0;
     }
 
     public int getFragmentHeight2() {
         WebViewCustomFragment webview = (WebViewCustomFragment) getSupportFragmentManager().findFragmentById(R.id.webitemsgame);
-        return webview.getView().getHeight();
+        if(webview!=null && webview.getView()!=null)
+            return webview.getView().getHeight();
+        return 0;
     }
 
     public void performFinalTasks(String theTitle, final int theScore, final String theMoveItem) {
@@ -71,97 +76,99 @@ public class GameActivity extends FragmentActivity {
                 FileInputStream fis = null;
                 List<RecordItem> recordsList = new ArrayList<>();
                 List<String> movesList = new ArrayList<>();
-                try {
-                    fis = openFileInput("R");
-                    ois = new ObjectInputStream(fis);
+                synchronized (LOCK) {
                     try {
-                        recordsList = (ArrayList<RecordItem>) ois.readObject();
-                    } catch (ClassNotFoundException e) {
+                        fis = openFileInput("R");
+                        ois = new ObjectInputStream(fis);
+                        try {
+                            recordsList = (ArrayList<RecordItem>) ois.readObject();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (
+                            IOException e)
+
+                    {
                         e.printStackTrace();
+                    } finally {
+                        try {
+                            if (ois != null)
+                                ois.close();
+                            if (fis != null)
+                                fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } catch (
-                        IOException e)
-
-                {
-                    e.printStackTrace();
-                } finally {
+                    recordsList.add(0, recordItem);
                     try {
-                        if (ois != null)
-                            ois.close();
-                        if (fis != null)
-                            fis.close();
-                    } catch (IOException e) {
+                        fos = openFileOutput("R", MODE_PRIVATE);
+                        oos = new ObjectOutputStream(fos);
+                        oos.writeObject(recordsList);
+
+                    } catch (
+                            IOException e)
+
+                    {
                         e.printStackTrace();
+                    } finally
+
+                    {
+                        try {
+                            if (oos != null)
+                                oos.close();
+                            if (fos != null)
+                                fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-                recordsList.add(0, recordItem);
-                try {
-                    fos = openFileOutput("R", MODE_PRIVATE);
-                    oos = new ObjectOutputStream(fos);
-                    oos.writeObject(recordsList);
 
-                } catch (
-                        IOException e)
-
-                {
-                    e.printStackTrace();
-                } finally
-
-                {
                     try {
-                        if (oos != null)
-                            oos.close();
-                        if (fos != null)
-                            fos.close();
-                    } catch (IOException e) {
+                        fis = openFileInput("M");
+                        ois = new ObjectInputStream(fis);
+                        try {
+                            movesList = (ArrayList<String>) ois.readObject();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    } catch (
+                            IOException e)
+
+                    {
                         e.printStackTrace();
+                    } finally {
+                        try {
+                            if (ois != null)
+                                ois.close();
+                            if (fis != null)
+                                fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-
-                try {
-                    fis = openFileInput("M");
-                    ois = new ObjectInputStream(fis);
+                    movesList.add(0, theMoveItem);
                     try {
-                        movesList = (ArrayList<String>) ois.readObject();
-                    } catch (ClassNotFoundException e) {
+                        fos = openFileOutput("M", MODE_PRIVATE);
+                        oos = new ObjectOutputStream(fos);
+                        oos.writeObject(movesList);
+
+                    } catch (
+                            IOException e)
+
+                    {
                         e.printStackTrace();
-                    }
-                } catch (
-                        IOException e)
+                    } finally
 
-                {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        if (ois != null)
-                            ois.close();
-                        if (fis != null)
-                            fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                movesList.add(0, theMoveItem);
-                try {
-                    fos = openFileOutput("M", MODE_PRIVATE);
-                    oos = new ObjectOutputStream(fos);
-                    oos.writeObject(movesList);
-
-                } catch (
-                        IOException e)
-
-                {
-                    e.printStackTrace();
-                } finally
-
-                {
-                    try {
-                        if (oos != null)
-                            oos.close();
-                        if (fos != null)
-                            fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    {
+                        try {
+                            if (oos != null)
+                                oos.close();
+                            if (fos != null)
+                                fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -184,4 +191,8 @@ public class GameActivity extends FragmentActivity {
         dialog.setCanceledOnTouchOutside(false);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

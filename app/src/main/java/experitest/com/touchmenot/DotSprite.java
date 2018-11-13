@@ -88,11 +88,20 @@ public class DotSprite  {
         Paint p = new Paint();
         p.setTextSize(mTextSize);
         p.setAntiAlias(true);
+        int colorGrey = mGameView.getContext().getResources().getColor(R.color.light_grey);
+        p.setColor(colorGrey);
         Rect textBounds = new Rect();
         String text = "Remaining time:"+Math.round(mRemainingTime/1000000);
         p.getTextBounds(text, 0, text.length(), textBounds);
-        canvas.drawText(text, -textBounds.left+TEXTPADDING, -textBounds.top+TEXTPADDING, p);
 
+        Paint pr = new Paint();
+        int colorPrimary = mGameView.getContext().getResources().getColor(R.color.colorPrimary);
+        pr.setColor(colorPrimary);
+        pr.setStyle(Paint.Style.FILL);
+        Rect textBGRect = new Rect(mGameView.getLeft(), mGameView.getTop(), (int)(mGameView.getWidth()*((mRemainingTime*1.0)/mTotalTime)),  mGameView.getTop()+TEXTPADDING+textBounds.height());
+
+        canvas.drawRect(textBGRect, pr);
+        canvas.drawText(text, -textBounds.left+TEXTPADDING+10, -textBounds.top+TEXTPADDING, p);
         canvas.drawBitmap(mBitmap, mX, mY, mPaint );
     }
 
