@@ -9,7 +9,11 @@
     <ListView
         android:id="@+id/logslistview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        style="@style/ListView"
+        android:clickable="true"
+        android:focusable="true">
     </ListView>
 
 </FrameLayout>

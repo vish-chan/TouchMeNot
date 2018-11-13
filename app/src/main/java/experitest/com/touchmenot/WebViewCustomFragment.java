@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import java.lang.ref.WeakReference;
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -36,7 +33,6 @@ public class WebViewCustomFragment extends Fragment {
             webview.loadUrl("http://172.16.16.123:8080");
         }
 
-
         mHandler = new Handler() {
 
             @Override
@@ -55,7 +51,7 @@ public class WebViewCustomFragment extends Fragment {
     public void onDestroyView() {
         if(mHandler!=null) {
             mHandler.removeCallbacksAndMessages(null);
-            hLogWrapper.write('D', TAG, "Callbacks removed for"+ getActivity().getLocalClassName());
+            hLogWrapper.write('D', TAG, "Callbacks removed for "+ getActivity().getLocalClassName());
         }
         super.onDestroyView();
     }

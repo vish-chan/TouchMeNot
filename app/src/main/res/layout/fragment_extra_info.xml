@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@color/colorWhite"
+    android:background="@color/colorPrimary"
     tools:context=".ExtraInfoFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:textSize="15dp"
         android:text="@string/gps" />
     <TextView
@@ -23,7 +23,7 @@
         android:layout_below="@+id/gps"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorWhite"
         android:textSize="15dp"
         android:text="@string/wifi" />
 

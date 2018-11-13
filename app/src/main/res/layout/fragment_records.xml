@@ -10,8 +10,8 @@
         android:id="@+id/recordslistfragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true">
+        android:layout_marginLeft="5dp"
+        style="@style/ListView">
     </ListView>]
 
 </FrameLayout>
