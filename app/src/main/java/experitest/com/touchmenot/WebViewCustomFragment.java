@@ -30,7 +30,7 @@ public class WebViewCustomFragment extends Fragment {
         View root =  inflater.inflate(R.layout.fragment_web_view_custom, container, false);
         final WebView webview = root.findViewById(R.id.webitems);
         if(webview!=null) {
-            webview.loadUrl("http://172.16.16.123:8080");
+            webview.loadUrl("http://192.168.1.9:2000");
         }
 
         mHandler = new Handler() {
